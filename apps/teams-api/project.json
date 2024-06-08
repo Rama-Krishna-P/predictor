@@ -1,0 +1,24 @@
+{
+  "name": "teams-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/teams-api/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "teams-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "teams-api:build:development"
+        },
+        "production": {
+          "buildTarget": "teams-api:build:production"
+        }
+      }
+    }
+  }
+}
