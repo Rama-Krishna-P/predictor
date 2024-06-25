@@ -1,0 +1,65 @@
+<header class="banner">
+    <div class="banner-content">
+        <h1>T20 World Cup 2024</h1>
+        <div *ngIf="group != undefined" class="user-info">
+            <div class="user-avatar">
+                <img src="https://lh3.googleusercontent.com/ogw/AF2bZygr-8rXpjxFY9y06K1d25l2Cge9nnQClpC38rrpNAyWBLw=s32-c-mo" alt="User Avatar">
+            </div>
+            <div>
+                <h5><strong>Group:</strong> {{group}}</h5>
+            </div>
+            <div class="user-details">
+                <p><strong>Points:</strong><br>1200</p>
+                <p><strong>Rank:</strong><br>1</p>
+                <p><strong>Strike Rate:</strong><br>85%</p>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div *ngIf="group == undefined && !isLoading" class="form-container">
+    <div class="form-content">
+        <form>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="groupCode" placeholder="Enter Group Code">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </form>
+    </div>
+</div>
+
+<nav *ngIf="group != undefined && !isLoading" class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Leader Board</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Rules</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Admin</a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <button class="btn btn-outline-danger" style="margin-right: 1rem;" type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div *ngIf="group != undefined && !isLoading">
+        <router-outlet></router-outlet>
+    </div>
+
+    <div class="loader-container" *ngIf="isLoading">
+        <div class="loader"></div>
+    </div>

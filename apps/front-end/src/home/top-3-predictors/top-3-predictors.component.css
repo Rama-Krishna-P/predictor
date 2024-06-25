@@ -1,0 +1,16 @@
+.user-card {
+    width: 18rem;
+  }
+.user-avatar {
+    width: 200px;
+    height: 200px;
+}
+.border-gold {
+    border: 3px solid gold;
+}
+.border-silver {
+    border: 3px solid silver;
+}
+.border-bronze {
+    border: 3px solid #CD7F32;
+}

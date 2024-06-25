@@ -1,0 +1,38 @@
+.flag-img {
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+}
+
+.flag-text {
+    display: flex;
+    align-items: center;
+}
+
+.team-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.green-icon {
+    color: green;
+    margin-right: 0.4rem;
+}
+
+.blue-icon {
+    color: blue;
+}
+
+.container-div {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+.col {
+    margin-bottom: 1rem;
+}
+
+.spacing {
+    margin-bottom: 1.5rem;
+}

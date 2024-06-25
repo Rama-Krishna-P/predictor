@@ -1,24 +1,37 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
-import 'reflect-metadata'
 import express from 'express';
-import { TeamsController } from './controllers/teams-controller';
-
-import * as config from './knexfile'
-import knex from 'knex';
-
-let db = knex(config["development"])
+import 'reflect-metadata';
+import { Model } from 'objection';
+import Knex from 'knex';
+import knexConfig from './knexfile';
+import teamRoutes from './routes/TeamRoutes';
+import Keycloak from "keycloak-connect";
 
 const app = express();
-app.use(express.json())
 
-app.use('/api/teams', TeamsController.getRoutes())
+const knex = Knex(knexConfig);
+Model.knex(knex);
 
-const port = process.env.PORT || 3333;
-const server = app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}/api`);
+const keycloakConfig = {
+  realm: 'predictor',
+  'auth-server-url': 'http://localhost:8080/',
+  'ssl-required': 'false',
+  resource: 'backend',
+  credentials: {
+    secret: 'xzSEq7Mo8W74QkNGga6iYp07pyDh6069',
+  },
+  'confidential-port': 0,
+  'bearer-only': true,
+};
+
+const keycloak = new Keycloak({}, keycloakConfig)
+
+app.use(express.json());
+
+app.use(keycloak.middleware())
+
+app.use('/api', keycloak.protect('realm:admin'), teamRoutes);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
-server.on('error', console.error);

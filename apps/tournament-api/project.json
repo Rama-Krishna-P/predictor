@@ -1,0 +1,24 @@
+{
+  "name": "tournament-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/tournament-api/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "tournament-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "tournament-api:build:development"
+        },
+        "production": {
+          "buildTarget": "tournament-api:build:production"
+        }
+      }
+    }
+  }
+}

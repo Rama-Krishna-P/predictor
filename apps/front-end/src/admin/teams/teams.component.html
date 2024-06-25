@@ -1,0 +1,61 @@
+<!-- team-management.component.html -->
+<div *ngIf="teamsWithSelectedTag.length > 0" class="my-3 p-3">
+    <h5>Sport: {{ selectedTag }}</h5>
+    <div class="d-flex flex-wrap gap-3 mt-3">
+        <div *ngFor="let team of teamsWithSelectedTag" class="p-2 d-flex align-items-center">
+            <img [src]="team.logo" alt="{{ team.name }} logo" width="48" height="48" class="me-3">
+            <strong>{{ team.name }}</strong>
+            <span>({{ team.shortName }})</span>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <form (ngSubmit)="onSubmit()" #teamForm="ngForm" class="my-4 p-4 border rounded bg-light">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label for="teamName" class="form-label">Team Name</label>
+                        <input type="text" id="teamName" name="teamName" [(ngModel)]="newTeam.name" class="form-control" required>
+                    </div>
+                    <div class="col-12">
+                        <label for="shortName" class="form-label">Short Name</label>
+                        <input type="text" id="shortName" name="shortName" [(ngModel)]="newTeam.shortName" class="form-control"
+                            required>
+                    </div>
+                    <div class="col-12 d-flex align-items-center">
+                        <div class="w-100">
+                            <label for="logo" class="form-label">Logo</label>
+                            <input type="file" id="logo" name="logo" (change)="onFileSelected($event)" class="form-control"
+                                accept=".jpg,.png" required>
+                        </div>
+                        <img *ngIf="logoPreview" [src]="logoPreview" class="ms-3 mt-4" alt="Logo Preview" width="48" height="48">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Create Team</button>
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <div class="search-team-form my-4 p-4 border rounded bg-light">
+                <h5>Search Team by Name</h5>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Enter team name" [(ngModel)]="searchTeamName" name="searchTeamName" (input)="onSearchInput($event)">
+                </div>
+                <div *ngIf="searchedTeams && searchedTeams.length > 0">
+                  <div *ngFor="let team of searchedTeams" class="d-flex justify-content-between align-items-center mb-2 p-2 border rounded">
+                    <div>
+                      <strong>{{ team.name }}</strong> ({{ team.shortName }})
+                    </div>
+                    <button *ngIf="!isTeamInCurrentTag(team)" class="btn btn-success" (click)="addTagToSearchedTeam(team)">Add to Current Sport</button>
+                    <!-- <p *ngIf="isTeamInCurrentTag(team)" class="text-success mb-0">Already in tag</p> -->
+                  </div>
+                </div>
+                <div *ngIf="isSearching && searchedTeams && searchedTeams.length === 0" class="text-danger mt-3">
+                    No team found
+                  </div>
+              </div>
+        </div>
+    </div>
+</div>
+
