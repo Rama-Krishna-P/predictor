@@ -14,6 +14,10 @@ class UserRepository extends BaseRepository<User> {
       await this.modelClass.query().insert({ id: userId });
     }
   }
+
+  async getAllActiveUserIds(): Promise<User[]> {
+    return await this.modelClass.query().select('id') as unknown as User[];
+  }
 }
 
 export default UserRepository;

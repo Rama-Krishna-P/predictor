@@ -33,7 +33,7 @@ class PredictionService {
       userId,
     }));
 
-    setImmediate(async () => await this.predictionRepository.createPredictions(predictions)) ;
+    setImmediate(async () => await this.predictionRepository.createPredictions(predictions));
 
     return { message: 'Predictions are being created' };
   }
@@ -67,6 +67,19 @@ class PredictionService {
         }
       }
     });
+  }
+
+  async createPredictionsForAllUsers(matchId: number): Promise<void> {
+    // Fetch all user IDs
+    const users = await this.userRepository.getAllActiveUserIds();
+
+    // Create predictions for all users for the new match
+    const predictions = users.map((user: User) => ({
+      matchId,
+      userId: user.id,
+    }));
+
+    await this.predictionRepository.createPredictions(predictions);
   }
 }
 

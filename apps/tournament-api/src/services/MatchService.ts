@@ -3,6 +3,7 @@ import Match from '../models/Match';
 import { MatchDto } from 'shared-objects'
 import MatchRepository from '../repositories/MatchRepository';
 import UserRepository from '../repositories/UserRepository';
+import PredictionService from './PredictionService';
 
 interface MaxMatchNo {
   maxMatchNo: number
@@ -12,18 +13,10 @@ interface MaxMatchNo {
 class MatchService {
   constructor(
     private matchRepository: MatchRepository,
-    private userRepository: UserRepository
+    private userRepository: UserRepository,
+    private predictionService: PredictionService
   ) {}
 
-  private async matchExists(homeTeamId: string, awayTeamId: string, matchDateTime: Date): Promise<boolean> {
-    const existingMatch = await Match.query()
-      .where('homeTeamId', homeTeamId)
-      .andWhere('awayTeamId', awayTeamId)
-      .andWhere('matchDateTime', matchDateTime)
-      .first();
-    return !!existingMatch;
-  }
-  
   async createMatch(matchData: MatchDto): Promise<Partial<Match>> {
     const existingMatch = await this.matchRepository.findByDateTimeAndTeams(matchData.matchDateTime!, matchData.homeTeamId!, matchData.awayTeamId!);
 
@@ -34,7 +27,11 @@ class MatchService {
     const maxMatchNo = await this.matchRepository.getMaxMatchNo();
     matchData.matchNo = (maxMatchNo ?? 0) + 1;
 
-    return this.matchRepository.create(matchData);
+    const match = await this.matchRepository.create(matchData);
+
+    setImmediate(async () => await this.predictionService.createPredictionsForAllUsers(match.id));
+
+    return match
   }
 
   async updateWinnerTeamId(id: number, winnerTeamId: string | null): Promise<Match> {
