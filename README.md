@@ -105,12 +105,12 @@ Sure, let's break down the steps to create a PNPM workspace with an Express Type
     ```    
 
 
-### Step 2: Create TypeScript Library
+### Step 3: Create TypeScript Library
 
 1. **Create the library package:**
     ```sh
-    mkdir -p packages/my-library
-    cd packages/my-library
+    mkdir -p libs/test-lib
+    cd libs/test-lib
     pnpm init
     ```
 
@@ -120,19 +120,75 @@ Sure, let's break down the steps to create a PNPM workspace with an Express Type
     pnpm tsc --init
     ```
 
-3. **Create a simple function in the library:**
-    - Create `src/index.ts`:
-      ```typescript
-      export const greet = (name: string): string => {
-        return `Hello, ${name}!`;
-      };
+3. **Set up TypeScript configuration:**
+    - Update `tsconfig.json` and make sure declaration property is set:
+      ```json
+      {
+        "compilerOptions": {
+          "outDir": "./dist",
+          "module": "commonjs",
+          "target": "es6",
+          "strict": true,
+          "esModuleInterop": true,
+          "declaration":true
+        },
+        "include": ["src/**/*.ts"],
+        "exclude": ["node_modules"]
+      }
       ```
-
-4. **Add a `build` script in `package.json`:**
-    ```json
-    "scripts": {
-      "build": "tsc"
+4. **Add a index.ts file in the src folder**
+  ```typescript
+    export const testFunction = () => {
+      return 'from test module changed'
     }
+  ```
+5. **Add build script in the package.json**
+    ```json
+      "scripts": {
+        ...
+        "build": "pnpm tsc",
+        ...
+      },
+    ```
+
+    - Run the build command
+    ```sh
+    pnpm run build
+    ```
+    After building you should be able to see the index.ts and index.d.ts file in the dist folder
+    <br/>
+6. **Add the library reference in the test-app project**
+    Run the following commands
+    ```powershell
+    cd ../../apps/test-app
+    pnpm add ../../libs/test-lib
+    ```
+7.  **Use the library function and test**
+    index.ts of test-app
+    ```typescript
+    ...
+    import { testFunction } from "test-lib";
+    ...
+    console.log(`hello world ${testFunction()}`)
+    ...
+    ```
+8.  **Build and test the application**
+    - Add the build script in the package.json
+    ```json
+    ...
+    "scripts": {
+      ...
+      "build": "webpack"
+      ...
+    },
+    ```
+    - Build the application using the command
+    ```powershell
+    pnpm run build
+    ```
+    - Run the application using the command
+    ```powershell
+    node ./dist/bundle.js
     ```
 
 ### Step 3: Create Node Application with Express and TypeScript
