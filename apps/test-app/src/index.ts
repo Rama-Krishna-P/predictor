@@ -1,5 +1,11 @@
-import { getMessage } from "./message";
+import express, { Request, Response } from "express";
 import { testFunction } from "test-lib";
-console.log('hello world!')
-console.log(`hello world ${getMessage()}`)
-console.log(`hello world ${testFunction()}`)
+const app = express()
+
+app.get('/', (req: Request, res: Response) => {
+    res.send(`Hello World ${testFunction()}`)
+})
+
+app.listen(3000, () => {
+    console.log('Server listening on port 3000')
+})
