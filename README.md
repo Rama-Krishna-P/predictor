@@ -86,6 +86,7 @@ Sure, let's break down the steps to create a PNPM workspace with an Express Type
     const path = require('path')
 
     module.exports = {
+        target: 'node',
         entry: './src/index.ts',
         module: {
             rules: [
