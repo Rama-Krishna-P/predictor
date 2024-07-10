@@ -1,7 +1,3 @@
-https://www.youtube.com/playlist?list=PL4cUxeGkcC9hOkGbwzgYFmaxB0WiduYJC - webpack
-
-Sure, let's break down the steps to create a PNPM workspace with an Express TypeScript application and a TypeScript library. We'll also set up Webpack for bundling and create a Dockerfile to build the image of the node application.
-
 ### Step 1: Initialize PNPM Workspace
 
 1. **Initialize a new PNPM workspace:**
