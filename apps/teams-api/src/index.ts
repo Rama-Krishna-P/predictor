@@ -1,9 +1,9 @@
 import express, { Request, Response } from "express";
-import { testFunction } from "test-lib";
+
 const app = express()
 
-app.get('/', (req: Request, res: Response) => {
-    res.send(`Hello World ${testFunction()}`)
+app.use('/', (req: Request, res: Response) => {
+    res.send('Hello world')
 })
 
 app.listen(3000, () => {
