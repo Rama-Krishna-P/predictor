@@ -12,21 +12,16 @@
         - 'libs/*'
     ```
 
-### Step 2: Nodejs project with typescript & webpack
+### Step 2: Create a host web app
 
-1. **Create a nodejs project**
+1. **Create an angular project for host app**
     ```powershell
-    mkdir -p apps/test-app
-    cd ./apps/test-app/
-    pnpm init
-    mkdir src
-    # Create a new file index.ts in the src folder and  add console.log('hello world!')
+    pnpm ng new host-app --standalone=false --package-manager=pnpm --directory=apps/host-app
     ```
 
-2. **Add typescript support**
+2. **Add webpack and webpack cli**
     ```powershell
-    pnpm add typescript ts-node -D
-    pnpm tsc --init
+    pnpm add webpack webpack-cli
     ```
 
 3. **Set up TypeScript configuration:**
