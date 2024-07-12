@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@angular/cli": "17.3.8",
     "gitignore": "^0.7.0"
   }
 }
