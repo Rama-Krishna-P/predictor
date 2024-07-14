@@ -1,30 +1,7 @@
-### Step 1: Initialize PNPM Workspace
+https://www.youtube.com/playlist?list=PL1UWPWOy5UlfLWfSstHBW-iVu6RWJtrG-
 
-1. **Initialize a new PNPM workspace:**
-    ```sh
-    pnpm init
-    ```
+https://www.angularminds.com/blog/how-to-build-micro-front-ends-using-module-federation-in-angular
 
-2. **Create a `pnpm-workspace.yaml` file:**
-    ```yaml
-    packages:
-        - 'apps/*'
-        - 'libs/*'
-    ```
+https://stackoverflow.com/questions/76059515/how-to-consume-federated-code-directly-in-a-component-angular-module-federation
 
-### Step 2: Create a host web app
 
-1. **Create an angular project for host app**
-    ```powershell
-    pnpm ng new host-app --standalone=false --package-manager=pnpm --directory=apps/host-app
-    ```
-
-2. **Add webpack and webpack cli**
-    ```powershell
-    pnpm add webpack webpack-cli
-    ```
-
-3. **Add module federation to the project**
-    ```powershell
-    pnpm ng add @angular-architects/module-federation --port=4200
-    ```
