@@ -10,7 +10,7 @@ sharedMappings.register(
 
 module.exports = {
   output: {
-    uniqueName: "hostApp",
+    uniqueName: "app2",
     publicPath: "auto",
     scriptType: "text/javascript"
   },
@@ -28,17 +28,17 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
         // For remotes (please adjust)
-        // name: "hostApp",
-        // filename: "remoteEntry.js",
-        // exposes: {
-        //     './Component': './/src/app/app.component.ts',
-        // },
+        name: "app2",
+        filename: "remoteEntry.js",
+        exposes: {
+            'HomeModule': './src/app/home/home.component.ts',
+        },
 
         // For hosts (please adjust)
-        remotes: {
-            "app1": "app1@http://localhost:4300/remoteEntry.js",
+        // remotes: {
+        //     "mfe1": "http://localhost:3000/remoteEntry.js",
 
-        },
+        // },
 
         shared: share({
           "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' },

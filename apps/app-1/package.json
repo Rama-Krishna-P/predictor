@@ -1,5 +1,5 @@
 {
-  "name": "host-app",
+  "name": "app-1",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -22,7 +22,6 @@
     "@angular/router": "^17.3.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "webpack": "^5.93.0",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
