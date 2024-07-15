@@ -1,5 +1,6 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
 import { Component, ViewChild, ViewContainerRef, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,11 +9,17 @@ import { Component, ViewChild, ViewContainerRef, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
+  constructor( private router: Router) {
+
+  }
 
   title = 'host-app';
   @ViewChild('header', { read: ViewContainerRef }) viewContainer!: ViewContainerRef;
 
   ngOnInit(): void {
+    // setTimeout(() => {
+    //   this.router.navigate(['/app2'])
+    // }, 10000);
     this.loadRemote()
   }
 

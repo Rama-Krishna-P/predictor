@@ -14,7 +14,7 @@ import { HtmlServiceService } from './services/html-service.service';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [HtmlServiceService]
 })

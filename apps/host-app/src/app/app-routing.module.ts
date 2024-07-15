@@ -18,6 +18,16 @@ const routes: Routes = [
         exposedModule: 'App1Module'
       }).then(m => m.HomeModule)
     }
+  },
+  {
+    path: 'app2',
+    loadChildren: () => {
+      return loadRemoteModule({
+        remoteEntry: 'http://localhost:4400/remoteEntry.js',
+        remoteName: 'app2',
+        exposedModule: 'HomeModule'
+      }).then(m => m.HomeModule)
+    }
   }
 ];
 

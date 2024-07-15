@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HtmlServiceService } from '../services/html-service.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TestLibService } from 'test-lib';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class HomeComponent implements OnInit {
   headerHTML: any
   constructor(private htmlService: HtmlServiceService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private testLibService: TestLibService
   ) {
   }
   
